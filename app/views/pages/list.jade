@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-12
+				.panel.panel-default
+					.panel-heading
+						h4 汽车分类列表
+					.panel-body
+						ul#lists
+							each brand in brands
+								li 
+									h4 #{brand.brand}
+									img(src="#{brand.logo}")
+									br
+									if brand.cates
+										each cate in brand.cates
+											button.btn.btn-success(data-cid="#{cate.id}") #{cate.name}
+											&nbsp;
+	script(src="/js/list.js")
+	#seriesModal.modal.fade(data-height="40%",data-width="70%")
+		.modal-dialog
+			.modal-content
+				.modal-header 系列列表
+				.modal-body
+					ul#seires
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") 关闭
+	#carsModal.modal.fade(data-height="40%")
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header 系列->车型列表
+				.modal-body
+					ul#cars-list
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") 关闭

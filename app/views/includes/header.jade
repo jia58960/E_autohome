@@ -1,0 +1,70 @@
+.container
+  .row
+    .page-header.clearfix
+      h1= title
+      .col-md-5
+        small 注：本站所有数据均抓取于于汽车之家，仅用来把玩分析，不会用于商业用途。
+//- .navbar.navbar-default.navbar-fixed-bottom
+//-   .container
+//-     .navbar-header
+//-       a.navbar-brand(href="/") 汽车之家数据分析系统
+//-     if user
+//-       p.navbar-text.navbar-right
+//-         span 欢迎您,#{user.name}
+//-         span &nbsp;&nbsp;
+//-           if user.avatar.indexOf('default') > -1
+//-             img#login-avatar(src="#{user.avatar}")
+//-           else
+//-             img#login-avatar(src="/avatar/#{user.avatar}")
+//-         span &nbsp;|&nbsp;
+//-         a.navbar-link(href="/logout") 登出
+//-     else
+//-       p.navbar-text.navbar-right
+//-         a.navbar-link(href="#", data-toggle="modal", data-target="#signupModal") 注册
+//-         span &nbsp;|&nbsp;
+//-         a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") 登录
+//- #signupModal.modal.fade
+//-   .modal-dialog
+//-     .modal-content
+//-       form.form-horizontal(method="POST", action="/user/signup", enctype="multipart/form-data")
+//-         .modal-header 注册
+//-         .modal-body
+//-           .form-group
+//-             label.col-md-2(for="signupName") 用户名
+//-             .col-md-10
+//-               input#signupName.form-control(name="user[name]", type="text")
+//-           .form-group
+//-             label.col-md-2(for="signPass") 密码
+//-             .col-md-10
+//-               input#signPass.form-control(name="user[password]", type="password")
+//-           .form-group
+//-             label.col-md-2 选择用户类型
+//-             .col-md-10
+//-               label.radio-inline
+//-                 input(name="user[role]", type="radio" value="0", checked)
+//-                 | 普通用户
+//-               label.radio-inline
+//-                 input(name="user[role]", type="radio" value="20")
+//-                 | 管理员用户
+//-           .form-group
+//-             label.col-md-2 选择头像
+//-             .col-md-10
+//-               input(type="file", name="avatar")
+//-         .modal-footer
+//-           button.btn.btn-default(type="button", data-dismiss="modal") 关闭
+//-           button.btn.btn-success(type="submit") 提交
+//- #signinModal.modal.fade
+//-   .modal-dialog
+//-     .modal-content
+//-       form(method="POST", action="/user/login")
+//-         .modal-header 登录
+//-         .modal-body
+//-           .form-group
+//-             label(for="signinName") 用户名
+//-             input#signinName.form-control(name="user[name]", type="text")
+//-           .form-group
+//-             label(for="signinPassword") 密码
+//-             input#signinPassword.form-control(name="user[password]", type="password")
+//-         .modal-footer
+//-           button.btn.btn-default(type="button", data-dismiss="modal") 关闭
+//-           button.btn.btn-success(type="submit") 提交

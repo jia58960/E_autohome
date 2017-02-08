@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            h4 #{car.name}
+          .panel-body
+            .row
+              .col-md-4
+                .alert.alert-success
+                    strong 特色：
+                    span #{car.features}
+                p 指导价：
+                  span(style="color:#E4393C;font-weight:bold;font-size:22px") #{car.guide}
+                p 评分：
+                ul
+                  each scoredetail in car.scoredetail
+                    li #{scoredetail.type} : #{scoredetail.score}
+                p 关注度：#{car.attention}
+                .progress.active(style="height:5px;")
+                    .progress-bar.progress-bar-success(role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: #{car.attention};height:5px;")
+                      span.sr-only
+                p #{car.score}
+                p 车主油耗：#{car.fuel}L/100km
+                p 数据更新时间： #{moment(car.meta.updateAt).format('YYYY-MM-DD')}
+              .col-md-8
+                ul#img-list
+                  each item in car.posters                  
+                    each img in item.imgs
+                      li
+                        a(href="#{img}",data-lightbox="carsimg", data-title="#{item.title}",)
+                          img(src="#{img}",width="150")
+            hr
+  script(src="/lib/lightbox2/js/lightbox.min.js") 
+  script.
+    lightbox.option({
+      'resizeDuration': 200,
+      'showImageNumberLabel':false
+    })

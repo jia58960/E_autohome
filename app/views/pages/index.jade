@@ -1,0 +1,63 @@
+extends ../layout
+block content
+	.container
+		.row
+			.panel.panel-default
+					.panel-heading
+						h3 初始化数据
+					.panel-body
+						if initdata && initdata.length
+							span 系统检测到上次已经初始化过<span class="badge badge-primary">基础条件</span>数据，你可以选择：
+							button.btn.green#old(disabled,title="一般情况下用此项即可") 利用旧条件(推荐)
+							button.btn.purple.init(disabled,title="抓取最新的检索条件，时长受您当前网络状况和目标站点性能影响") 重新初始化(不推荐)
+							a.btn.green(href="/list") 查看所有数据列表
+						else
+							span 系统没有检测到基础数据，请：
+							button.btn.btn-success.init 初始化数据
+						button.btn.red#all(disabled,title="抓取所有汽车数据信息，可能耗时较长，请耐心等待...") 一键抓取所有数据(慎用)
+						hr
+						if initdata && initdata.length
+							div.form-horizontal#main-wrapper
+								.form-group
+								label.col-sm-1.control-label(for="level") 种类
+								.col-sm-9#type-wrapper
+									each lev in initdata[0].levels
+										if lev.name=== '全部'
+											button.btn.btn-default.active(type="button", data-level='#{lev.value}') #{lev.name}
+										else 
+											button.btn.btn-default(type="button", data-level='#{lev.value}') #{lev.name}
+								.form-group
+								label.col-sm-1.control-label(for="level") 价格范围：
+								div.col-md-9#price-wrapper(data-pos="#{initdata[0].price.pos}")
+									select.form-control.select-group.input-medium#min-price
+										each price in initdata[0].price.data
+											option(value="#{price.value}") #{price.name}
+									span.text-inline &nbsp;--
+									select.form-control.select-group.input-medium#max-price
+										each price in initdata[0].price.data
+											option(value="#{price.value}") #{price.name}
+
+								each filters in initdata[0].conditions
+									.form-group
+									label.col-sm-1.control-label(for="") #{filters.title}
+									.col-sm-9.condition-wrapper(data-pos="#{filters.pos}")
+										each filter in filters.data
+											if filter.name === '全部'
+												button.btn.btn-default.active(type="button", data-val='#{filter.value}') #{filter.name}
+											else
+												button.btn.btn-default(type="button", data-val='#{filter.value}') #{filter.name}
+
+								.form-group
+								label.col-sm-1.control-label #{initdata[0].features.title}
+								.col-sm-9#feature-wrapper(data-pos="#{initdata[0].features.pos}")
+									.checkbox-list
+										each feature in initdata[0].features.data
+											label.checkbox-inline
+												input(type="checkbox",name="feature", value="#{feature.value}")
+												| #{feature.name}
+								.form-group
+								label.col-sm-1.control-label 
+								.col-sm-9
+									button.btn.btn-success.btn-block#sub 选好了？走你！
+	script(type="text/javascript",src="/js/index.js")
+							
